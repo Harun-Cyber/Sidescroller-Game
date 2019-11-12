@@ -1,5 +1,6 @@
+var gameFPS = 50;
 var canvas = document.getElementById("canvas"),
-    ctx = canvas.getContext("2d"),
+    context = canvas.getContext("2d"),
     width = 500,
     height = 200,
     player = {
@@ -12,6 +13,9 @@ var canvas = document.getElementById("canvas"),
 canvas.width = width;
 canvas.height = height;
  
-// De speler
-ctx.fillStyle = "red";
-ctx.fillRect(player.x, player.y, player.width, player.height);
+function update(){
+  // De speler
+  context.fillStyle = "red";
+  context.fillRect(player.x, player.y, player.width, player.height);
+}
+intervalID = setInterval(update, 1000 / gameFPS);
