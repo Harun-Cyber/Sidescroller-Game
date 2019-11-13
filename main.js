@@ -12,7 +12,8 @@ var canvas = document.getElementById("canvas"),
       MovementX : 0,
       MovementY : 0
     },
-    keys = [];
+    keys = [],
+    friction = 0.6;
  
 canvas.width = width;
 canvas.height = height;
@@ -34,9 +35,10 @@ function update(){
       player.MovementX--
     }
   }
+  player.MovementX = player.MovementX * friction;
 
-  player.x += player.MovementX;
-  player.y += player.MovementY;
+  player.x = player.x + player.MovementX;
+  player.y = player.y + player.MovementY;
 
   if(player.x >= width-player.width){
     player.x = width-player.width;
@@ -46,6 +48,7 @@ function update(){
   }
 
   // De speler
+  context.clearRect(0, 0, width, height);
   context.fillStyle = "red";
   context.fillRect(player.x, player.y, player.width, player.height);
 }
