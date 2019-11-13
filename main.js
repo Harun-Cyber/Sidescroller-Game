@@ -10,10 +10,12 @@ var canvas = document.getElementById("canvas"),
       height : 5,
       speed : 3,
       MovementX : 0,
-      MovementY : 0
+      MovementY : 0,
+      jumping : false
     },
     keys = [],
-    friction = 0.6;
+    friction = 0.9,
+    gravity = 0.2;
  
 canvas.width = width;
 canvas.height = height;
@@ -22,6 +24,10 @@ function update(){
   // De toetsen
   if (keys[38]){
     // Up Arrow toets
+    if(player.jumping == false){
+      player.jumping = true;
+      player.MovementY = -player.speed * 2;
+    }
   }
   if (keys[39]){
     // Right Arrow toets
@@ -37,14 +43,21 @@ function update(){
   }
   player.MovementX = player.MovementX * friction;
 
+  player.MovementY = player.MovementY + gravity;
+
   player.x = player.x + player.MovementX;
   player.y = player.y + player.MovementY;
 
-  if(player.x >= width-player.width){
+  if(player.x >= width - player.width){
     player.x = width-player.width;
   }
   else if(player.x <= 0){
     player.x = 0;
+  }
+
+  if(player.y >= height - player.height){
+    player.y = height - player.height;
+    player.jumping = false;
   }
 
   // De speler
