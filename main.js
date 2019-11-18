@@ -2,12 +2,12 @@ var gameFPS = 50;
 var canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = 500,
-    height = 200,
+    height = 500,
     player = {
       x : width / 2,
       y : height - 5,
-      width : 5,
-      height : 5,
+      width : 10,
+      height : 10,
       speed : 3,
       MovementX : 0,
       MovementY : 0,
@@ -15,7 +15,28 @@ var canvas = document.getElementById("canvas"),
     },
     keys = [],
     friction = 0.9,
-    gravity = 0.1;
+    gravity = 0.05;
+
+    var boxes = []        //Array voor de voorwerpen
+    //Dimensies
+    boxes.push({
+      x: 0,
+      y: 0,
+      width: 10,
+      height: height
+    });
+    boxes.push({
+      x: 0,
+      y: height - 2,
+      width: width,
+      height: 50
+    });
+    boxes.push({
+      x: width - 10,
+      y: 0,
+      width: 50,
+      height: height
+    });
  
 canvas.width = width;
 canvas.height = height;
