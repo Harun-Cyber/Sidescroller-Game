@@ -15,7 +15,7 @@ var canvas = document.getElementById("canvas"),
     },
     keys = [],
     friction = 0.9,
-    gravity = 0.2;
+    gravity = 0.1;
  
 canvas.width = width;
 canvas.height = height;
