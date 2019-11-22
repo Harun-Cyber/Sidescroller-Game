@@ -2,20 +2,21 @@ var gameFPS = 50;
 var canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = 500,
-    height = 200,
+    height = 500,
     player = {
       x : width / 2,
       y : height - 5,
-      width : 5,
-      height : 5,
+      width : 15,
+      height : 15,
       speed : 3,
       MovementX : 0,
       MovementY : 0,
-      jumping : false
+      jumping : false,
+      grounded : false
     },
     keys = [],
     friction = 0.9,
-    gravity = 0.1;
+    gravity = 0.15;
 
     var boxes = []        //Array voor de voorwerpen
     //Dimensies
@@ -27,7 +28,7 @@ var canvas = document.getElementById("canvas"),
     });
     boxes.push({
       x: 0,
-      y: height - 2,
+      y: height - 10,
       width: width,
       height: 50
     });
@@ -37,7 +38,42 @@ var canvas = document.getElementById("canvas"),
       width: 50,
       height: height
     });
- 
+    boxes.push({
+      x: 0,
+      y: 400,
+      width: 150,
+      height: 10
+    });
+    boxes.push({
+      x: 350,
+      y: 400,
+      width: 150,
+      height: 10
+    });
+    boxes.push({
+      x: 0,
+      y: 300,
+      width: 150,
+      height: 10
+    });
+    boxes.push({
+      x: 350,
+      y: 300,
+      width: 150,
+      height: 10
+    });
+    boxes.push({
+      x: 0,
+      y: 200,
+      width: 150,
+      height: 10
+    });
+    boxes.push({
+      x: 350,
+      y: 200,
+      width: 150,
+      height: 10
+    });
 canvas.width = width;
 canvas.height = height;
  
@@ -45,8 +81,9 @@ function update(){
   // De toetsen
   if (keys[38]){
     // Up Arrow toets
-    if(player.jumping == false){
+    if(player.jumping == false && player.grounded == true){
       player.jumping = true;
+      player.grounded = false;
       player.MovementY = -player.speed * 2;
     }
   }
@@ -66,29 +103,35 @@ function update(){
 
   player.MovementY = player.MovementY + gravity;
   
-  player.x = player.x + player.MovementX;
-  player.y = player.y + player.MovementY;
-  
-  if(player.x >= width - player.width){
-    player.x = width-player.width;
-  }
-  else if(player.x <= 0){
-    player.x = 0;
-  }
-
-  if(player.y >= height - player.height){
-    player.y = height - player.height;
-    player.jumping = false;
-  }
-
   // De speler
   context.clearRect(0, 0, width, height);
   context.fillStyle = "black";
   context.beginPath();
 
+  player.grounded = false;
   for(var i = 0; i < boxes.length; i++){
     context.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+    var dir = CollisionChecker(player, boxes[i]);
+
+    if(dir === "l" || dir === "r"){
+      player.MovementX = 0;
+      player.jumping = false;
+    }
+    else if(dir === "b"){
+      player.grounded = true;
+      player.jumping = false;
+    }
+    else if(dir === "t"){
+      player.MovementY = 0;
+    }
   }
+
+  if(player.grounded == true){
+    player.MovementY = 0;
+  }
+  player.x = player.x + player.MovementX;
+  player.y = player.y + player.MovementY;
+
   context.fill();
   context.fillStyle = "red";
   context.fillRect(player.x, player.y, player.width, player.height);
@@ -128,7 +171,7 @@ function CollisionChecker(ShapeA, ShapeB){
       }
     }
   }
-  return colDir;
+  return colDir; 
 }
 
 document.body.addEventListener("keydown", function(e){
