@@ -1,4 +1,4 @@
-var gameFPS = 50;
+const gameFPS = 50;
 var canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = 500,
@@ -18,7 +18,46 @@ var canvas = document.getElementById("canvas"),
     friction = 0.9,
     gravity = 0.15;
 
-    var boxes = []        //Array voor de voorwerpen
+    let coins = []        //Array voor de coins die je kunt collecten
+    //Dimensies
+    coins.push({
+      x: 15,
+      y: 370,
+      width: 20,
+      height: 30
+    });
+    coins.push({
+      x: 15,
+      y: 270,
+      width: 20,
+      height: 30
+    });
+    coins.push({
+      x: 15,
+      y: 170,
+      width: 20,
+      height: 30
+    });
+    coins.push({
+      x: 465,
+      y: 370,
+      width: 20,
+      height: 30
+    });
+    coins.push({
+      x: 465,
+      y: 270,
+      width: 20,
+      height: 30
+    });
+    coins.push({
+      x: 465,
+      y: 170,
+      width: 20,
+      height: 30
+    });
+
+    let boxes = []        //Array voor de voorwerpen
     //Dimensies
     boxes.push({
       x: 0,
@@ -103,8 +142,83 @@ function update(){
 
   player.MovementY = player.MovementY + gravity;
   
-  // De speler
   context.clearRect(0, 0, width, height);
+  //De Coins
+  context.fillStyle = "yellow";
+  context.beginPath();
+ 
+  for (var i = 0; i < coins.length; i++) {
+    context.fillRect(coins[i].x, coins[i].y, coins[i].width, coins[i].height);
+    
+    var dir = CollisionChecker(player, coins[0]);
+
+    if(dir === "l" || dir === "r"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "b"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "t"){
+      window.location = 'https://www.google.nl/';
+    }
+    var dir = CollisionChecker(player, coins[1]);
+
+    if(dir === "l" || dir === "r"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "b"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "t"){
+      window.location = 'https://www.google.nl/';
+    }
+    var dir = CollisionChecker(player, coins[2]);
+
+    if(dir === "l" || dir === "r"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "b"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "t"){
+      window.location = 'https://www.google.nl/';
+    }
+    var dir = CollisionChecker(player, coins[3]);
+
+    if(dir === "l" || dir === "r"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "b"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "t"){
+      window.location = 'https://www.google.nl/';
+    }
+    var dir = CollisionChecker(player, coins[4]);
+
+    if(dir === "l" || dir === "r"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "b"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "t"){
+      window.location = 'https://www.google.nl/';
+    }
+    var dir = CollisionChecker(player, coins[5]);
+
+    if(dir === "l" || dir === "r"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "b"){
+      window.location = 'https://www.google.nl/';
+    }
+    if(dir === "t"){
+      window.location = 'https://www.google.nl/';
+    }
+}
+  context.fill();
+  //De Platformen
   context.fillStyle = "black";
   context.beginPath();
 
@@ -133,6 +247,7 @@ function update(){
   player.y = player.y + player.MovementY;
 
   context.fill();
+  //De Speler
   context.fillStyle = "red";
   context.fillRect(player.x, player.y, player.width, player.height);
 }
@@ -146,7 +261,7 @@ function CollisionChecker(ShapeA, ShapeB){
       hHeights = (ShapeA.height / 2) + (ShapeB.height / 2),
       colDir = null;
 
-  // if the x and y vector are less than the half width or half height, they we must be inside the object, causing a collision If playerX en PlayerY minder dan de half width of half height zijn, dan moeten die in het object zijn. Hierdoor komt er een collision
+  //If playerX en PlayerY minder dan de half width of half height zijn, dan moeten die in het object zijn. Hierdoor komt er een collision
   if (Math.abs(playerX) < hWidths && Math.abs(playerY) < hHeights) {  // berekent vanuit welke kant de collision plaatsvind (top, bottom, left, or right)         
     var objectX = hWidths - Math.abs(playerX),             
         objectY = hHeights - Math.abs(playerY);         
