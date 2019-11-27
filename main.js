@@ -153,68 +153,68 @@ function update(){
     var dir = CollisionChecker(player, coins[0]);
 
     if(dir === "l" || dir === "r"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl1.html';
     }
     if(dir === "b"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl1.html';
     }
     if(dir === "t"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl1.html';
     }
     var dir = CollisionChecker(player, coins[1]);
 
     if(dir === "l" || dir === "r"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl2.html';
     }
     if(dir === "b"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl2.html';
     }
     if(dir === "t"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl2.html';
     }
     var dir = CollisionChecker(player, coins[2]);
 
     if(dir === "l" || dir === "r"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl3.html';
     }
     if(dir === "b"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl3.html';
     }
     if(dir === "t"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl3.html';
     }
     var dir = CollisionChecker(player, coins[3]);
 
     if(dir === "l" || dir === "r"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl4.html';
     }
     if(dir === "b"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl4.html';
     }
     if(dir === "t"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl4.html';
     }
     var dir = CollisionChecker(player, coins[4]);
 
     if(dir === "l" || dir === "r"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl5.html';
     }
     if(dir === "b"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl5.html';
     }
     if(dir === "t"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl5.html';
     }
     var dir = CollisionChecker(player, coins[5]);
 
     if(dir === "l" || dir === "r"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl6.html';
     }
     if(dir === "b"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl6.html';
     }
     if(dir === "t"){
-      window.location = 'https://www.google.nl/';
+      window.location = 'lvl6.html';
     }
 }
   context.fill();
