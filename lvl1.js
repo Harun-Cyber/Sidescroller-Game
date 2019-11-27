@@ -1,5 +1,5 @@
 const gameFPS = 50;
-var canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 const width = 1500;
 const height = 700;
@@ -13,7 +13,7 @@ var player = {
     MovementY: 0,
     jumping: false,
     grounded: false
-}
+};
 let keys = [];
 var friction = 0.9;
 var gravity = 0.15;
