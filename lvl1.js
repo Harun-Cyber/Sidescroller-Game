@@ -218,11 +218,11 @@ function update() {
             var dir = CollisionChecker(player, coins[i]);
 
             if (dir === "l" || dir === "r") {
-                window.location = 'sidescroller.html';
+                window.location = 'index.html';
             } else if (dir === "b") {
-                window.location = 'sidescroller.html';
+                window.location = 'index.html';
             } else if (dir === "t") {
-                window.location = 'sidescroller.html';
+                window.location = 'index.html';
             }
         }
         context.fill();

@@ -1,4 +1,4 @@
-const gameFPS = 15;
+const gameFPS = 10;
 const canvas = document.getElementById("snake"); //De vorm van de Canvas
 var context = canvas.getContext("2d");
 const width = 400;
@@ -7,7 +7,7 @@ var score = 0;
 var snake = {
     x: 10,
     y: 10,
-    snakeSize: 3,
+    tail: 3,
     snaketrail: []
 };
 var gameWorld = {
@@ -17,18 +17,19 @@ var gameWorld = {
     movementY: 0
 };
 let keys = [];
-var apple = []
-apple.push({
-    x: Math.random(),
-    y: Math.random(),
-    width: 15,
-    height: 15
-});
+var apple = {
+    x: 15,
+    y: 15,
+    width: 20,
+    height: 20
+};
 
 canvas.width = width;
 canvas.height = height;
 
 function update(){
+    snake.x = snake.x + gameWorld.movementX;
+    snake.y = snake.y + gameWorld.movementY;
     if (keys[38]) {
         // Up Arrow toets
         gameWorld.movementX = 0;
@@ -49,8 +50,29 @@ function update(){
         gameWorld.movementX = 0;
         gameWorld.movementY = 1;
     }
-    snake.x = snake.x + gameWorld.movementX;
-    snake.y = snake.y + gameWorld.movementY;
+    //De Slang
+    context.fillStyle = "green";
+    for(var i = 0; i < snake.snaketrail.length; i++){
+        context.fillRect(
+            snake.snaketrail[i].x * gameWorld.tileSize,
+            snake.snaketrail[i].y * gameWorld.tileSize,
+            gameWorld.tileSize,
+            gameWorld.tileSize 
+        );
+        //Code voor als de slang zijn eigen staart bijt
+        if(snake.snaketrail[i].x == snake.x && snake.snaketrail[i].y == snake.y){
+            snake.tail = 3; 
+        }
+    }
+    
+    snake.snaketrail.push({
+        x: snake.x,
+        y: snake.y
+    });
+    
+    while(snake.snaketrail.length > snake.tail){
+        snake.snaketrail.shift();
+    }
     
     //Code voor als de snake buiten de border gaat
     if (snake.x < 0){
@@ -60,59 +82,24 @@ function update(){
         snake.x = 0;
     }
     if(snake.y < 0){
-        snake.y = gameWorld.borderSize -1;
+        snake.y = gameWorld.borderSize - 1;
     }
     if(snake.y > gameWorld.borderSize -1){
         snake.y = 0;
     }
-
-//De appel
-context.fillStyle = "red";
-context.beginPath(); 
-
-    for (var i = 0; i < apple.length; i++) {
-        context.fillRect(apple[i].x, apple[i].y, apple[i].width, apple[i].height);
-        var dir = CollisionChecker(player, apple[i]);
-
-        if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
-            apple[i].x = Math.random();
-            apple[i].y = Math.random();          
-        }
+    //De appel      
+    context.fillStyle = "red";
+    context.fillRect(apple.x * gameWorld.tileSize,
+        apple.y * gameWorld.tileSize,
+        apple.width,
+        apple.height
+    );
+    //Code voor als de slang de appel eet
+    while (apple.x == snake.x && apple.y == snake.y) {
+        snake.tail++;
+        apple.x = Math.floor(Math.random() * gameWorld.tileSize);
+        apple.y = Math.floor(Math.random() * gameWorld.tileSize);
     }
-    context.fill();
-}
-function CollisionChecker(ShapeA, ShapeB) {
-    //Krijgt de positie van het midden van de speler
-    var playerX = (ShapeA.x + (ShapeA.width / 2)) - (ShapeB.x + (ShapeB.width / 2)),
-        playerY = (ShapeA.y + (ShapeA.height / 2)) - (ShapeB.y + (ShapeB.height / 2)),
-        //Voeg de half witdhs en half heights van de objecten toe
-        hWidths = (ShapeA.width / 2) + (ShapeB.width / 2),
-        hHeights = (ShapeA.height / 2) + (ShapeB.height / 2),
-        colDir = null;
-
-    //If playerX en PlayerY minder dan de half width of half height zijn, dan moeten die in het object zijn. Hierdoor komt er een collision
-    if (Math.abs(playerX) < hWidths && Math.abs(playerY) < hHeights) { // berekent vanuit welke kant de collision plaatsvind (top, bottom, left, or right)         
-        var objectX = hWidths - Math.abs(playerX),
-            objectY = hHeights - Math.abs(playerY);
-        if (objectX >= objectY) {
-            if (playerY > 0) {
-                colDir = "t";
-                ShapeA.y = ShapeA.y + objectY;
-            } else {
-                colDir = "b";
-                ShapeA.y = ShapeA.y - objectY;
-            }
-        } else {
-            if (playerX > 0) {
-                colDir = "l";
-                ShapeA.x = ShapeA.x + objectX;
-            } else {
-                colDir = "r";
-                ShapeA.x = ShapeA.x - objectX;
-            }
-        }
-    }
-    return colDir;
 }
 
 document.body.addEventListener("keydown", function (e) {
@@ -121,4 +108,4 @@ document.body.addEventListener("keydown", function (e) {
 document.body.addEventListener("keyup", function (e) {
     keys[e.keyCode] = false;
 });
-var intervalID = setInterval(update, 1000 / gameFPS);
+setInterval(update, 1000 / gameFPS);
