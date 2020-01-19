@@ -50,6 +50,9 @@ function update(){
         gameWorld.movementX = 0;
         gameWorld.movementY = 1;
     }
+    //De Canvas
+    context.fillStyle = "black";
+    context.fillRect(0, 0, height, width);
     //De Slang
     context.fillStyle = "green";
     for(var i = 0; i < snake.snaketrail.length; i++){
@@ -61,7 +64,8 @@ function update(){
         );
         //Code voor als de slang zijn eigen staart bijt
         if(snake.snaketrail[i].x == snake.x && snake.snaketrail[i].y == snake.y){
-            snake.tail = 3; 
+            snake.tail = 3;
+            score = 0; 
         }
     }
     
@@ -97,8 +101,22 @@ function update(){
     //Code voor als de slang de appel eet
     while (apple.x == snake.x && apple.y == snake.y) {
         snake.tail++;
+        score++;
         apple.x = Math.floor(Math.random() * gameWorld.tileSize);
         apple.y = Math.floor(Math.random() * gameWorld.tileSize);
+        newLevel();
+        scoreKeeper()
+    }
+}
+
+function scoreKeeper(){
+    var newScore = document.getElementById("score")
+    newScore.innerText = "Your score is " + score;
+}
+
+function newLevel(){
+    if(score >= 15){
+        window.location = "lvl3.html"
     }
 }
 
