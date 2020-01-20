@@ -1,3 +1,115 @@
 *, *::after, *::before{
     box-sizing: border-box;
 }
+
+:root{
+    --signs-size: 100px;
+    --content-size: 70px;
+}
+
+.winner{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: whitesmoke;
+    font-size: 7rem;
+}
+
+.winner.show{
+    display: flex;
+}
+
+.winner button{
+    font-size: 5rem;
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+.winner button:hover{
+    background-color: orangered;
+    border-color: black;
+}
+
+.signs{
+    width: var(--signs-size);
+    height: var(--signs-size);
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.signs.x, .signs.o{
+    cursor: not-allowed;
+}
+
+.game{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: repeat(3, auto);
+}
+
+body{
+    margin: 0;
+}
+
+.game.x .signs:hover{
+
+}
+
+.game.o .signs:hover{
+
+}
+
+.signs.o::before,
+.signs.o.after,
+.game.o .signs:hover::before,
+.game.o .signs:hover::after {
+    content: "";
+    width: var(--content-size);
+    height: var(--content-size);
+    background-color: orangered;
+    position: absolute;
+    border-radius: 50%;
+    border: 5px solid black;
+}
+
+.sings.x::before,
+.signs.x::after,
+.game.x .signs:hover::before,
+.game.x .signs:hover::after {
+    content: "";
+    width: var(--content-size);
+    height: var(--content-size);
+    background-color:white;
+    position: absolute;
+}
+
+.signs.x::after,
+.game.x .signs:hover::after{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "\274c";
+    font-size: 70px; 
+    color: white;
+    line-height: 100px;
+    text-align: center;
+    justify-content: center;
+}
