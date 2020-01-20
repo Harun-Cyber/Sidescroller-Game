@@ -1,0 +1,69 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+body{
+    background: linear-gradient(to right, red, orange);
+}
+
+.clock{
+    width: 300px;
+    height: 300px;
+    background-color: rgba(250, 250, 250, .6);
+    border-radius: 50%;
+    border: 3px solid black;
+    position: relative;
+}
+
+.clock .number{
+    --rotation: 0;
+    transform-origin: bottom;
+    z-index: 10;
+    transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    background-color: black;
+    border: 0.5px solid snow;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.clock .number.seconds{
+    width: 3px;
+    height: 50%;
+    background-color: orangered;
+}
+.clock .number.minutes{
+    width: 3px;
+    height: 50%;
+    background-color: blue;
+}
+.clock .number.hours{
+    width: 3px;
+    height: 50%;
+    background-color: blue;
+}
+
+.clock .cijfer{
+    --rotation: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    transform: rotate(var(--rotation));
+}
+
+.clock .cijfers1{--rotation: 30deg;}
+.clock .cijfers2{--rotation: 60deg;}
+.clock .cijfers3{--rotation: 90deg;}
+.clock .cijfers4{--rotation: 120deg;}
+.clock .cijfers5{--rotation: 150deg;}
+.clock .cijfers6{--rotation: 180deg;}
+.clock .cijfers7{--rotation: 210deg;}
+.clock .cijfers8{--rotation: 240deg;}
+.clock .cijfers9{--rotation: 270deg;}
+.clock .cijfers10{--rotation: 300deg;}
+.clock .cijfers11{--rotation: 330deg;}
+

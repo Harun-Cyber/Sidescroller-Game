@@ -17,7 +17,7 @@ var player = {
 let keys = [];
 var friction = 0.9;
 var gravity = 0.15;
-let playerchanger = []; //Array voor een object dat de uiterlijk van de speler kan veranderen
+let playerchanger = [] //Array voor een object dat de uiterlijk van de speler kan veranderen
 //Dimensies
 playerchanger.push({
     x: 920,
