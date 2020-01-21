@@ -10,7 +10,7 @@ function update(){
     var date = new Date();
     var seconds = date.getSeconds() / 60;
     var minutes = date.getMinutes() / 60;
-    var hours = date.getHours() / 60;
+    var hours = date.getHours() / 12;
 
     clockTime(hoursHTML, hours);
     clockTime(minutesHTML, minutes);
